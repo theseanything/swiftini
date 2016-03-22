@@ -11,7 +11,7 @@ import Foundation
 public class Inifile{
     let fileManager = NSFileManager.defaultManager()
     public var sections = [String: Dictionary<String, String>]()
-    let sectionRegex = try? NSRegularExpression(pattern: "^\\s?\\[(.+)\\]", options:[])
+    let sectionRegex = try? NSRegularExpression(pattern: "^\\s*\\[(.+?)\\]", options:[])
     let propertyRegex = try? NSRegularExpression(pattern: "(\\S+)\\s?=\\s?(\\S+)", options:[])
     let commentRegex = try? NSRegularExpression(pattern: "^([^;#]+)[;#]?.*$", options:[])
     
@@ -59,12 +59,12 @@ public class Inifile{
             var line = lines[index]
             line = parseComments(line)
             let result = propertyRegex!.firstMatchInString(line, options: [], range: NSMakeRange(0, line.characters.count))
-            if (result != nil) {
+            if (sectionRegex!.firstMatchInString(line, options: [], range: NSMakeRange(0, line.characters.count)) != nil) {
+                return properties
+            } else if (result != nil) {
                 let key = (line as NSString).substringWithRange(result!.rangeAtIndex(1))
                 let value = (line as NSString).substringWithRange(result!.rangeAtIndex(2))
                 properties[key] = value
-            } else if (sectionRegex!.firstMatchInString(line, options: [], range: NSMakeRange(0, line.characters.count)) != nil) {
-                return properties
             }
         }
         

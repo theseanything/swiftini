@@ -49,24 +49,15 @@ class swiftiniTests: XCTestCase {
         XCTAssertNil(iniFile)
     }
     
-    func testParametersWithNoSection(){
-        
+    func testParameters(){
+        let fileSections = loadSectionsFromFile("parameters")
+        XCTAssert(trueSections == fileSections)
     }
     
-    func testMultipleParamtersOnSameLine(){
-        
-    }
-    
-    func testMultipleSectionsOnSameLine(){
-        
-    }
-    
-    func testSectionAndParamtersOnSameLine(){
-        
-    }
-    
-    func testWhitespaceInSectionHeader(){
-        
+    func testSections(){
+        let fileSections = loadSectionsFromFile("sections")
+        trueSections["emptySection"] = [String: String]()
+        XCTAssert(trueSections == fileSections)
     }
     
     func testPerformanceExample() {
