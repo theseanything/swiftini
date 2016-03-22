@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		AF6271B31CA07A860077DF13 /* TestIniFiles in Resources */ = {isa = PBXBuildFile; fileRef = AF6271B21CA07A860077DF13 /* TestIniFiles */; };
 		AF99A8371C98A3F9000F09DB /* swiftini.h in Headers */ = {isa = PBXBuildFile; fileRef = AF99A8361C98A3F9000F09DB /* swiftini.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AF99A83E1C98A3F9000F09DB /* swiftini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF99A8331C98A3F9000F09DB /* swiftini.framework */; };
 		AF99A8431C98A3F9000F09DB /* swiftiniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF99A8421C98A3F9000F09DB /* swiftiniTests.swift */; };
 		AF99A84E1C98A437000F09DB /* Inifile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF99A84D1C98A437000F09DB /* Inifile.swift */; };
 /* End PBXBuildFile section */
@@ -26,10 +25,10 @@
 
 /* Begin PBXFileReference section */
 		AF6271B21CA07A860077DF13 /* TestIniFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestIniFiles; sourceTree = "<group>"; };
-		AF99A8331C98A3F9000F09DB /* swiftini.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = swiftini.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AF8109501CA100B800BA8DA8 /* swiftini.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = swiftini.framework; path = /Users/seanrankine/swiftini/build/Debug/swiftini.framework; sourceTree = "<absolute>"; };
+		AF9338C81CA1AFA100118126 /* swiftiniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = swiftiniTests.xctest; path = /Users/seanrankine/swiftini/build/Debug/swiftiniTests.xctest; sourceTree = "<absolute>"; };
 		AF99A8361C98A3F9000F09DB /* swiftini.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = swiftini.h; sourceTree = "<group>"; };
 		AF99A8381C98A3F9000F09DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AF99A83D1C98A3F9000F09DB /* swiftiniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftiniTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF99A8421C98A3F9000F09DB /* swiftiniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftiniTests.swift; sourceTree = "<group>"; };
 		AF99A8441C98A3F9000F09DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF99A84D1C98A437000F09DB /* Inifile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inifile.swift; sourceTree = "<group>"; };
@@ -47,7 +46,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AF99A83E1C98A3F9000F09DB /* swiftini.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,17 +57,7 @@
 			children = (
 				AF99A8351C98A3F9000F09DB /* swiftini */,
 				AF99A8411C98A3F9000F09DB /* swiftiniTests */,
-				AF99A8341C98A3F9000F09DB /* Products */,
 			);
-			sourceTree = "<group>";
-		};
-		AF99A8341C98A3F9000F09DB /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				AF99A8331C98A3F9000F09DB /* swiftini.framework */,
-				AF99A83D1C98A3F9000F09DB /* swiftiniTests.xctest */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		AF99A8351C98A3F9000F09DB /* swiftini */ = {
@@ -121,7 +109,7 @@
 			);
 			name = swiftini;
 			productName = swiftini;
-			productReference = AF99A8331C98A3F9000F09DB /* swiftini.framework */;
+			productReference = AF8109501CA100B800BA8DA8 /* swiftini.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		AF99A83C1C98A3F9000F09DB /* swiftiniTests */ = {
@@ -139,7 +127,7 @@
 			);
 			name = swiftiniTests;
 			productName = swiftiniTests;
-			productReference = AF99A83D1C98A3F9000F09DB /* swiftiniTests.xctest */;
+			productReference = AF9338C81CA1AFA100118126 /* swiftiniTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -168,7 +156,7 @@
 				en,
 			);
 			mainGroup = AF99A8291C98A3F9000F09DB;
-			productRefGroup = AF99A8341C98A3F9000F09DB /* Products */;
+			productRefGroup = AF99A8291C98A3F9000F09DB;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -314,6 +302,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
@@ -334,6 +323,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_USE_OPTIMIZATION_PROFILE = NO;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;

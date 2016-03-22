@@ -26,7 +26,9 @@ class swiftiniTests: XCTestCase {
     
     func loadSectionsFromFile(filename: String) -> [String: Dictionary<String, String>]{
         let filePath = bundle.pathForResource(filename, ofType: "ini", inDirectory: "TestIniFiles")
-        return Inifile(filepathAsString: filePath!)!.sections
+        var IniFileObj = [String: Dictionary<String, String>]()
+        do { IniFileObj = try Inifile(filepathAsString: filePath!)!.sections } catch { XCTAssert(true, "Could not initalise inifile object") }
+        return IniFileObj
     }
     
     func testNormalFile() {
@@ -45,7 +47,7 @@ class swiftiniTests: XCTestCase {
     }
     
     func testNonExistantFile(){
-        let iniFile = Inifile(filepathAsString: "/nonexistant.ini")
+        let iniFile = try? Inifile(filepathAsString: "/nonexistant.ini")
         XCTAssertNil(iniFile)
     }
     
@@ -61,10 +63,7 @@ class swiftiniTests: XCTestCase {
     }
     
     func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+
     }
     
 }
