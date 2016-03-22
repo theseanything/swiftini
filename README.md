@@ -7,8 +7,12 @@ Here it is finally, the file parser you've all obviously been waiting for. The d
 Clone, build and import the framework bundle into swift projects.
 
 Create a inifile object:
-    let iniFile = Inifile(ilepathAsString: "path/to/some/ini/file")
+```swift
+let iniFile = Inifile(ilepathAsString: "path/to/some/ini/file")
+```
 
 Then access properties:
-    let properties = iniFile.sections
-    properties["exampleSection"]["exampleProperty"]
+```swift
+let properties = iniFile.sections
+let propertyValue = properties["exampleSection"]["exampleProperty"]
+```
