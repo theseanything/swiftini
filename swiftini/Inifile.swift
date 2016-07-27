@@ -8,83 +8,90 @@
 
 import Foundation
 
-enum parseError: ErrorType{
-    case FileNotFound
-    case FileNotWritable
-    case FileNotReadable
-    case ErrorReadingFile
+enum parseError: ErrorProtocol{
+    case fileNotFound
+    case fileNotWritable
+    case fileNotReadable
 }
 
 public class Inifile {
-    let fileManager = NSFileManager.defaultManager()
     public var sections = [String: Dictionary<String, String>]()
-    let sectionRegex = try! NSRegularExpression(pattern: "^\\s*\\[(.+?)\\]", options:[])
-    let propertyRegex = try! NSRegularExpression(pattern: "(\\S+)\\s?=\\s?(\\S+)", options:[])
-    let commentRegex = try! NSRegularExpression(pattern: "^([^;#]+)[;#]?.*$", options:[])
     
-    public init?(filepathAsString: String) throws {
-        if (!fileManager.fileExistsAtPath(filepathAsString)) {
-            throw parseError.FileNotFound
-        } else if (!fileManager.isReadableFileAtPath(filepathAsString)) {
-            throw parseError.FileNotReadable
-        } else {
-            do {
-                let contents = try String(contentsOfFile: filepathAsString, encoding: NSUTF8StringEncoding)
-                parseSections(contents)
-            } catch {
-                parseError.ErrorReadingFile
-            }
-        }
+    let sectionRegex = try! RegularExpression(pattern: "^\\s*\\[(.+?)\\]", options:[])
+    let propertyRegex = try! RegularExpression(pattern: "(\\S+)\\s?=\\s?(\\S+)", options:[])
+    let commentRegex = try! RegularExpression(pattern: "^([^;]+)[;]?.*$", options:[])
+    
+    
+    public init(with string: String) {
+        self.read(from: string)
     }
     
-    public convenience init?(filepathAsURL: NSURL) throws {
-        let fileURL = filepathAsURL.URLByStandardizingPath!
+    public convenience init?(filepathAsString: String) throws {
+        let contents = try String(contentsOfFile: filepathAsString, encoding: String.Encoding.utf8)
+        try self.init(with: contents)
+    }
+    
+    public convenience init?(filepathAsURL: URL) throws {
+        let fileURL = try! filepathAsURL.standardizingPath()
         let filePath = fileURL.path!
         try self.init(filepathAsString: filePath)
     }
     
-    func parseSections(file: String){
-        let lines = file.componentsSeparatedByCharactersInSet(NSCharacterSet.newlineCharacterSet())
+    private func read(from file: String){
+        let lines = file.components(separatedBy: CharacterSet.newlines)
+        var current_section_name:String?
         
-        for var index = 0; index < lines.count; ++index {
-            var line = lines[index]
-            line = parseComments(line)
-            let sectionResult = sectionRegex.firstMatchInString(line, options: [], range: NSMakeRange(0, line.characters.count))
-            if (sectionResult != nil) {
-                let sectionName = (line as NSString).substringWithRange(sectionResult!.rangeAtIndex(1))
-                ++index
-                let properties = parseProperties(lines, index: &index)
-                sections[sectionName] = properties
-                --index
+        for raw_line in lines {
+            let line = removeComment(from: raw_line) as NSString
+
+            if (line.trimmingCharacters(in: NSCharacterSet.whitespaces) == ""){
+                continue
             }
+            
+            let section_name = parseSections(line as String)
+            if (section_name != nil){
+                current_section_name = section_name
+                self.sections[section_name!] = [:]
+                continue
+            }
+            
+            let property = parseProperties(line as String)
+            if (property != nil && current_section_name != nil){
+                self.sections[current_section_name!]?[property!.key] = property!.value
+            }
+            
+            
         }
     }
     
-    func parseProperties(lines: Array<String>, inout index: Int) -> [String: String] {
-        var properties = [String: String]()
-        
-        for ; index < lines.count; ++index {
-            var line = lines[index]
-            line = parseComments(line)
-            let result = propertyRegex.firstMatchInString(line, options: [], range: NSMakeRange(0, line.characters.count))
-            if (sectionRegex.firstMatchInString(line, options: [], range: NSMakeRange(0, line.characters.count)) != nil) {
-                return properties
-            } else if (result != nil) {
-                let key = (line as NSString).substringWithRange(result!.rangeAtIndex(1))
-                let value = (line as NSString).substringWithRange(result!.rangeAtIndex(2))
-                properties[key] = value
-            }
+    func parseSections(_ line: String) -> String? {
+        let sectionResult = self.sectionRegex.firstMatch(in: line, options: [], range: NSMakeRange(0, line.characters.count))
+        if (sectionResult != nil) {
+            return (line as NSString).substring(with: sectionResult!.range(at: 1))
         }
+        return nil
         
-        return properties
     }
     
-    func parseComments(line: String) -> String {
-        let commentResult = commentRegex.firstMatchInString(line, options: [], range: NSMakeRange(0, line.characters.count))
+    func parseProperties(_ line: String) -> (key: String, value: String)? {
+        let result = self.propertyRegex.firstMatch(in: line, options: [], range: NSMakeRange(0, line.characters.count))
+        if (result != nil) {
+            let key = (line as NSString).substring(with: result!.range(at: 1))
+            let value = (line as NSString).substring(with: result!.range(at: 2))
+            return (key, value)
+        }
+        return nil
+    }
+    
+    func removeComment(from line: String) -> String {        
+        if (line.characters.first == ";"){
+            return ""
+        }
+        let commentResult = self.commentRegex.firstMatch(in: line, options: [], range: NSMakeRange(0, line.characters.count))
         if (commentResult != nil){
-            return (line as NSString).substringWithRange(commentResult!.rangeAtIndex(1))
+            return (line as NSString).substring(with: commentResult!.range(at: 1))
         }
-        return ""
+        return line
     }
     
 }

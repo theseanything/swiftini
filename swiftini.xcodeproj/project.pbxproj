@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AF3DC6171D49398C005EE0E7 /* Inifile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF99A84D1C98A437000F09DB /* Inifile.swift */; };
 		AF6271B31CA07A860077DF13 /* TestIniFiles in Resources */ = {isa = PBXBuildFile; fileRef = AF6271B21CA07A860077DF13 /* TestIniFiles */; };
 		AF99A8371C98A3F9000F09DB /* swiftini.h in Headers */ = {isa = PBXBuildFile; fileRef = AF99A8361C98A3F9000F09DB /* swiftini.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF99A8431C98A3F9000F09DB /* swiftiniTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF99A8421C98A3F9000F09DB /* swiftiniTests.swift */; };
@@ -25,13 +26,13 @@
 
 /* Begin PBXFileReference section */
 		AF6271B21CA07A860077DF13 /* TestIniFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestIniFiles; sourceTree = "<group>"; };
-		AF8109501CA100B800BA8DA8 /* swiftini.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = swiftini.framework; path = /Users/seanrankine/swiftini/build/Debug/swiftini.framework; sourceTree = "<absolute>"; };
-		AF9338C81CA1AFA100118126 /* swiftiniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; name = swiftiniTests.xctest; path = /Users/seanrankine/swiftini/build/Debug/swiftiniTests.xctest; sourceTree = "<absolute>"; };
 		AF99A8361C98A3F9000F09DB /* swiftini.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = swiftini.h; sourceTree = "<group>"; };
 		AF99A8381C98A3F9000F09DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF99A8421C98A3F9000F09DB /* swiftiniTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = swiftiniTests.swift; sourceTree = "<group>"; };
 		AF99A8441C98A3F9000F09DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AF99A84D1C98A437000F09DB /* Inifile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inifile.swift; sourceTree = "<group>"; };
+		AFBFA7CE1CA31B0E00164452 /* swiftini.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = swiftini.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFBFA7CF1CA31B0E00164452 /* swiftiniTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = swiftiniTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +58,7 @@
 			children = (
 				AF99A8351C98A3F9000F09DB /* swiftini */,
 				AF99A8411C98A3F9000F09DB /* swiftiniTests */,
+				AFBFA7D01CA31B1A00164452 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -78,6 +80,15 @@
 				AF99A8441C98A3F9000F09DB /* Info.plist */,
 			);
 			path = swiftiniTests;
+			sourceTree = "<group>";
+		};
+		AFBFA7D01CA31B1A00164452 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AFBFA7CE1CA31B0E00164452 /* swiftini.framework */,
+				AFBFA7CF1CA31B0E00164452 /* swiftiniTests.xctest */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -109,7 +120,7 @@
 			);
 			name = swiftini;
 			productName = swiftini;
-			productReference = AF8109501CA100B800BA8DA8 /* swiftini.framework */;
+			productReference = AFBFA7CE1CA31B0E00164452 /* swiftini.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		AF99A83C1C98A3F9000F09DB /* swiftiniTests */ = {
@@ -127,7 +138,7 @@
 			);
 			name = swiftiniTests;
 			productName = swiftiniTests;
-			productReference = AF9338C81CA1AFA100118126 /* swiftiniTests.xctest */;
+			productReference = AFBFA7CF1CA31B0E00164452 /* swiftiniTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -137,14 +148,16 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Sean Rankine";
 				TargetAttributes = {
 					AF99A8321C98A3F9000F09DB = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 					AF99A83C1C98A3F9000F09DB = {
 						CreatedOnToolsVersion = 7.2.1;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -197,6 +210,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF3DC6171D49398C005EE0E7 /* Inifile.swift in Sources */,
 				AF99A8431C98A3F9000F09DB /* swiftiniTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,7 +246,7 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -279,9 +293,10 @@
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -316,6 +331,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -336,6 +352,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = seanrankine.swiftini;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -347,6 +365,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = seanrankine.swiftiniTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -358,6 +377,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = seanrankine.swiftiniTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

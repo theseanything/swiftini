@@ -11,7 +11,7 @@ import XCTest
 
 class swiftiniTests: XCTestCase {
     var trueSections = [String: Dictionary<String, String>]()
-    let bundle = NSBundle(forClass: swiftiniTests.self);
+    let bundle = Bundle(for: swiftiniTests.self);
     
     override func setUp() {
         super.setUp()
@@ -24,7 +24,7 @@ class swiftiniTests: XCTestCase {
         super.tearDown()
     }
     
-    func loadSectionsFromFile(filename: String) -> [String: Dictionary<String, String>]{
+    func loadSectionsFromFile(_ filename: String) -> [String: Dictionary<String, String>]{
         let filePath = bundle.pathForResource(filename, ofType: "ini", inDirectory: "TestIniFiles")
         var IniFileObj = [String: Dictionary<String, String>]()
         do { IniFileObj = try Inifile(filepathAsString: filePath!)!.sections } catch { XCTAssert(true, "Could not initalise inifile object") }
@@ -62,10 +62,38 @@ class swiftiniTests: XCTestCase {
         XCTAssert(trueSections == fileSections)
     }
     
-    func testPerformanceExample() {
-
+    func testPerformanceSectionParsing() {
+        var many_sections = ""
+        for i in 1 ... 10000 {
+            many_sections.append("[ section " + String(i) + " ]\n")
+        }
+        self.measure {
+            let _ = Inifile(with: many_sections)
+        }
     }
     
+    func testPerformancePropertyParsing() {
+        var many_properties = "[Section]\n"
+        for i in 1 ... 1000 {
+            many_properties.append("key" + String(i) + "= value\n")
+        }
+        self.measure {
+            let _ = Inifile(with: many_properties)
+            
+        }
+    
+    }
+    
+    func testPerformanceCommentParsing() {
+        var many_comments = ""
+        for _ in 1 ... 10000 {
+            many_comments.append("; comment \n")
+            many_comments.append("not a comment ; comment \n")
+        }
+        self.measure {
+            let _ = Inifile(with: many_comments)
+        }
+    }
 }
 
 // Overloading of the == operator to support nested dictionaries.
